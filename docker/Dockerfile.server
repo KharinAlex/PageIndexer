@@ -1,0 +1,12 @@
+FROM python:3.7
+
+ENV PYTHONUNBUFFERED 1
+RUN apt-get update && apt-get install libpq-dev build-essential -y
+
+RUN mkdir -p /PageIndexer
+
+WORKDIR /PageIndexer
+
+COPY server/requirements.txt /PageIndexer
+
+RUN pip3 install --no-cache-dir -r /PageIndexer/requirements.txt --ignore-installed
