@@ -1,0 +1,31 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.server
+    container_name: indexer_server
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    environment:
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: test_db
+      DB_HOST: database
+    volumes:
+      - ./server:/PageIndexer
+    links:
+      - db:database
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+  db:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.db
+    container_name: indexer_db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: test_db
