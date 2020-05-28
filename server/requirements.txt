@@ -1,6 +1,6 @@
 uvicorn==0.11.5
 fastapi==0.55.1
-requests==2.18.4
+requests==2.20.0
 beautifulsoup4==4.9.1
 psycopg2==2.8.5
 bloom-filter==1.3
