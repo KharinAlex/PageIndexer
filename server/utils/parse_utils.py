@@ -56,7 +56,6 @@ async def parse_related(url: str, session: aiohttp.ClientSession, depth: int = S
         "uri": url,
         "content": text.replace("\n", " ").replace("\r", " ")
     })
-    print(url)
     if (depth - 1) > 0:
         links = [prepare_href(url, link) for link in soup.find_all('a', href=True)]
         tasks = [parse_url(link, depth - 1)
@@ -67,6 +66,7 @@ async def parse_related(url: str, session: aiohttp.ClientSession, depth: int = S
 async def parse_url(url: str, depth: int = SEARCH_DEPTH) -> list:
     global parsed_pages
     parsed_pages.clear()
+    visited.add(url)
     async with aiohttp.ClientSession() as session:
         await parse_related(url, session, depth)
     return parsed_pages
