@@ -6,6 +6,7 @@ import Parser from 'html-react-parser';
 
 const FLASH_MESSAGE_TIMEOUT = 10000;
 
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -96,19 +97,18 @@ class SearchBar extends Component {
 
 
   render() {
-    console.log(this.props);
-    let pages = this.props.pages ? <div>Pages in index: {this.props.pages}</div> : '';
     let header = ([
-      <div className="input-group mb-3" style={{width: '30%'}}>
+      <div className="input-group mb-3" style={{width: '40%'}}>
         <input id="searchInput" type="text" maxLength="80"
           ref={this.inputRef} className="form-control"
-          placeholder="Enter keywords..." aria-label="Keywords"
+          placeholder="Enter keywords..."
           aria-describedby="basic-addon2"/>
         <div className="input-group-append">
           <button id="searchBtn" className="btn btn-outline-secondary" type="button" onClick={this.doSearch}>Search</button>
         </div>
+        <input type="button" className="btn btn-link" value="Go to index" onClick={this.props.switcher}/>
       </div>,
-      pages,
+      <div>Pages in index: {this.props.pages}</div>,
     ]);
 
 

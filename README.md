@@ -7,7 +7,7 @@ Install [Docker](https://www.docker.com/community-edition#/download) and [Docker
 
 Run Docker
 
-Build and start three containers configured for development work and tail the log output
+Build and start three containers configured for development work and tail the log output. This may take a several minutes during first run.
 
     make up
 

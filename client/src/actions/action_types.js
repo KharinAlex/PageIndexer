@@ -1,6 +1,5 @@
 // Component actions
-export const INDEX_TASK_IDLE = 'INDEX_TASK_CREATED';
-export const INDEX_TASK_CREATED = 'INDEX_TASK_CREATED';
+export const INDEX_TASK_START = 'INDEX_TASK_START';
 export const INDEX_TASK_SUCCESS = 'INDEX_TASK_SUCCESS';
 export const INDEX_TASK_FAIL = 'INDEX_TASK_FAIL';
 

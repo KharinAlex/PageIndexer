@@ -28,7 +28,6 @@ def db_create(connection, cursor, query: str, params: tuple = None, many: bool =
 @execute_decorator
 def db_read(connection, cursor, query: str, params: tuple = None):
     cursor.execute(query, params)
-    print(cursor.query)
     return [row for row in cursor]
 
 

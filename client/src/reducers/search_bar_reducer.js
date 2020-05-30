@@ -4,7 +4,7 @@ const initialState = {
   isSucceeded: false,
   isFailed: false,
   isSearching: false,
-  errMsg: null,
+  errMsg: '',
   data: [
   ],
   pages: 0,

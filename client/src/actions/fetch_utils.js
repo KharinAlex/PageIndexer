@@ -1,4 +1,4 @@
-export function sendRequest(url, options, timeout = 10000, errMsg = 'Request timeout') {
+export function sendRequest(url, options, timeout = 2 * 60 * 1000, errMsg = 'Request timeout') {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       reject(errMsg);
