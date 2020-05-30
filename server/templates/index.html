@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Index page {% endblock %}
+
+{% block content %}
+    {% if message %}
+        <p>{{message}}</p>
+    {% endif %}
+    {% if errMsg %}
+        <p>{{errMsg}}</p>
+    {% endif %}
+    <form id="indexForm" method="post" action="/index">
+        <p>
+            <label for="url">URL:</label>
+            <input id="url" type="text" name="url" maxlength="255" placeholder="Page URL...">
+        </p>
+        <p>
+            <label for="depth">Search depth:</label>
+            <select id="depth" name="depth">
+                <option value="1">1</option>
+                <option selected value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </p>
+        <button type="submit">Index</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    font {background-color: yellow;}
+    a {all: unset;}
+{% endblock %}
+{% block title %} Search result {% endblock %}
+
+{% block content %}
+    {% if results %}
+        <div>
+            <p>
+                <a style="color:blue;cursor: pointer;" id="switchOrder">Switch sort method</a>
+            </p>
+        </div>
+        <div id="searchResults">
+              {% for item in results %}
+                <a href="{{item.uri}}">
+                    <div id="item_{{loop.count}}">
+                        <b>{{ item.title | safe }}</b><br/>
+                        {{ item.uri }}<br/>
+                        {{ item.content | safe }}
+                    </div>
+                </a><p></p>
+
+              {% endfor %}
+        </div>
+        <input id="updateBtn" type="button" value="View more...">
+    {% else %}
+        <p>No matches found</p>
+    {% endif %}
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const q = urlParams.get('q');
+    let offset = 0;
+    let button = document.getElementById("updateBtn");
+
+    function updateList(data) {
+        let parent = document.getElementById("searchResults");
+        let id = offset;
+        data.forEach(function(el) {
+            let a = document.createElement("a");
+            id++;
+
+            a.href = el.uri;
+            a.innerHTML = `
+                <div id="item_${id}">
+                  <b>${el.title}</b><br/>
+                  ${el.uri}<br/>
+                  ${el.content}
+                </div>`;
+            parent.appendChild(a);
+            parent.appendChild(document.createElement("br"));
+        });
+    }
+
+    function getMore() {
+        offset += 10;
+        fetch(`/api/search?q=${q}&offset=${offset}`).
+        then(function(response) {
+          return response.json()
+         }).then(function(data) {
+            if (data.length < 10)
+                button.hidden = true;
+            updateList(data);
+         });
+    };
+    button.onclick = getMore;
+
+    let switchLink = document.getElementById("switchOrder");
+    switchLink.href = `/search_change_order?q=${q}`;
+</script>
+{% endblock %}

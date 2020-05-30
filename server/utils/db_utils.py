@@ -1,6 +1,7 @@
 import psycopg2
 import settings
 from contextlib import closing
+from psycopg2.extras import execute_values
 
 
 def get_connection():
@@ -19,13 +20,19 @@ def execute_decorator(func):
 
 
 @execute_decorator
-def db_create(connection, cursor, query: str, params: tuple = None):
-    cursor.execute(query, params)
+def db_create(connection, cursor, query: str, params: tuple = None, many: bool = False):
+    execute_values(cursor, query, params) if many else cursor.execute(query, params)
     connection.commit()
-    return cursor.rowcount()
 
 
 @execute_decorator
 def db_read(connection, cursor, query: str, params: tuple = None):
     cursor.execute(query, params)
     return [row for row in cursor]
+
+
+@execute_decorator
+def db_count(connection, cursor):
+    cursor.execute("""SELECT COUNT(*) FROM pages;""")
+    count = cursor.fetchone()[0]
+    return count

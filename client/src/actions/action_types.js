@@ -1,0 +1,12 @@
+// Component actions
+export const INDEX_TASK_START = 'INDEX_TASK_START';
+export const INDEX_TASK_SUCCESS = 'INDEX_TASK_SUCCESS';
+export const INDEX_TASK_FAIL = 'INDEX_TASK_FAIL';
+
+export const SEARCH_GET_PAGE_COUNT = 'SEARCH_GET_PAGE_COUNT';
+export const SEARCH_START = 'SEARCH_START';
+export const SEARCH_MORE = 'SEARCH_MORE';
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export const SEARCH_FAIL = 'SEARCH_FAIL';
+
+

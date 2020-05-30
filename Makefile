@@ -1,10 +1,13 @@
-.PHONY: up down shell-server shell-db clean-docker
+.PHONY: up down shell-client shell-server shell-db clean-docker
 
 up:
-	docker-compose up -d && docker-compose logs -f backend db
+	docker-compose up -d && docker-compose logs -f frontend backend db
 
 down:
 	docker-compose stop
+
+shell-client:
+	docker exec -ti indexer_client bash
 
 shell-server:
 	docker exec -ti indexer_server bash
